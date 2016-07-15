@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -20,6 +21,11 @@ public class GreetingController {
     private static BigInteger nextId;
     private static Map<BigInteger, Greeting> greetingMap;
 
+    public GreetingController()
+    {
+    	
+    }
+    
     private static Greeting save(Greeting greeting) {
         if (greetingMap == null) {
             greetingMap = new HashMap<BigInteger, Greeting>();
@@ -46,6 +52,7 @@ public class GreetingController {
             value = "/api/greetings",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public ResponseEntity<Collection<Greeting>> getGreetings() {
 
         Collection<Greeting> greetings = greetingMap.values();
